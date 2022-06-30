@@ -56,3 +56,30 @@ about2();
 // about1 will have copy of about() function in which 'this' will refer to name1 object
 const about1 = about.bind(name1, 'Etawah', 'UP', 'India');
 about1();
+
+// another example
+const test = {
+  a: 12,
+  b: 100,
+};
+
+function tester(a, b) {
+  console.log(`a: ${this.a} and b: ${this.b} | other a: ${a} and b: ${b}`); // this -> test
+}
+
+// call()
+tester.call(test, 200, 400);
+
+// apply()
+tester.apply(test, [200, 400]);
+
+// bind()
+tester.bind(test, 200, 400)();
+
+function tester2(a, b, c) {
+  console.log(`a: ${this.a} and b: ${this.b} | other a: ${a} b: ${b} c: ${c}`); // this -> test
+}
+
+tester2.bind(test, 10, 20)(30);
+tester2.bind(test, 10)(20, 30);
+tester2.bind(test)(10, 20, 30);
