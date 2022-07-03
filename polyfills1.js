@@ -67,6 +67,24 @@ console.log(arr1.merge('+'));
 console.log(arr1.merge('007'));
 console.log(arr1.merge('text'));
 
+// polyfill for fill()
+Array.prototype.polyFill = function (filler, start, end) {
+  let i, j;
+  if (start) {
+    i = start;
+    j = end ? end : this.length;
+  } else {
+    i = 0;
+    j = this.length;
+  }
+
+  for (let index = i; index < j; index++) this[index] = filler;
+  return this;
+};
+
+console.log(arr1.polyFill('empty', 2, 5));
+console.log(arr1.polyFill('empty', 3));
+
 // poyfill for map()
 Array.prototype.polyMap = function (callback) {
   const outputArr = [];

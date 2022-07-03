@@ -79,6 +79,21 @@ Array.prototype.mySort = function (compare) {
 console.log(num.mySort((a, b) => a - b));
 console.log(num.mySort((a, b) => b - a));
 
+// polyfill for fill()
+Array.prototype.myFill = function (value, start, end) {
+  let i, j;
+  if (start) {
+    i = start;
+    j = end ? end : this.length;
+  } else {
+    i = 0;
+    j = this.length;
+  }
+
+  for (let index = i; index < j; index++) this[index] = value;
+  return this;
+};
+
 // creating objects using a normal function
 function Student(name, age) {
   const student = Object.create({}, { name: { value: name }, age: { value: age } });
