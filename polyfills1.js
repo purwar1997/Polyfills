@@ -72,6 +72,21 @@ Array.prototype.polyConcat = function (arr) {
   return [...this, ...arr];
 };
 
+// polyfill for toString()
+Array.prototype.polyToString = function () {
+  let str = '';
+  for (const item of this) {
+    str = str + String(item) + ',';
+  }
+  str = str.slice(0, str.length - 1);
+  return str;
+};
+
+// alternative polyfill using join()
+Array.prototype.toStringByJoin = function () {
+  return this.join(',');
+};
+
 // polyfill for fill()
 Array.prototype.polyFill = function (filler, start, end) {
   let i, j;
@@ -143,6 +158,7 @@ Array.prototype.polyFindIndex = function (callback) {
       return index;
     }
   }
+  return -1;
 };
 
 console.log(arr1);

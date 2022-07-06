@@ -56,6 +56,7 @@ Array.prototype.myFindIndex = function (callback) {
       return index;
     }
   }
+  return -1;
 };
 
 console.log(num.myFindIndex(item => item % 2 === 1));
