@@ -67,6 +67,11 @@ console.log(arr1.merge('+'));
 console.log(arr1.merge('007'));
 console.log(arr1.merge('text'));
 
+// polyfill for concat()
+Array.prototype.polyConcat = function (arr) {
+  return [...this, ...arr];
+};
+
 // polyfill for fill()
 Array.prototype.polyFill = function (filler, start, end) {
   let i, j;
@@ -182,3 +187,33 @@ console.log(arr1);
 console.log(arr1.polySort((a, b) => a - b));
 console.log(arr1.polySort((a, b) => b - a));
 console.log([9, 5, 12, 0, 12, -8].sort((a, b) => b - a));
+
+// polyfill for some()
+Array.prototype.polySome = function (callback) {
+  for (let [index, item] of this.entries()) {
+    if (callback(item, index, this)) {
+      return true;
+    }
+  }
+  return false;
+};
+
+let numbers = [2, 44, 8, 34, -10];
+console.log(numbers.polySome(item => item < 0));
+console.log(numbers.polySome(item => item % 3 === 0));
+
+// polyfill for every()
+Array.prototype.polyEvery = function (callback) {
+  for (let [index, item] of this.entries()) {
+    if (callback(item, index, this) === false) {
+      return false;
+    }
+  }
+  return true;
+};
+
+numbers = [2, 44, 8, 34, 1];
+console.log(numbers.polyEvery(item => item > 0));
+console.log(numbers.polyEvery(item => item % 2 === 0));
+
+// Note: callbacks inside filter(), find(), findIndex(), some() and every() returns either true or false

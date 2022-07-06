@@ -80,7 +80,7 @@ console.log(num.mySort((a, b) => a - b));
 console.log(num.mySort((a, b) => b - a));
 
 // polyfill for fill()
-Array.prototype.myFill = function (value, start, end) {
+Array.prototyp.myFill = function (value, start, end) {
   let i, j;
   if (start) {
     i = start;
@@ -92,6 +92,26 @@ Array.prototype.myFill = function (value, start, end) {
 
   for (let index = i; index < j; index++) this[index] = value;
   return this;
+};
+
+// polyfill for some()
+Array.prototype.mySome = function (callback) {
+  for (let [index, item] of this.entries()) {
+    if (callback(item, index, this)) {
+      return true;
+    }
+    return false;
+  }
+};
+
+// polyfill for every()
+Array.prototype.myEvery = function (callback) {
+  for (let [index, item] of this.entries()) {
+    if (callback(item, index, this) === false) {
+      return false;
+    }
+    return true;
+  }
 };
 
 // creating objects using a normal function
